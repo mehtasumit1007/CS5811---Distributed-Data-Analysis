@@ -1,0 +1,47 @@
+Hello Everyone,
+
+ 
+
+I was doing research on figuring out a complex research question on some interesting domain for our group project. As process of that, I have come across one of the dataset from Kaggle and I formed a research question as well on top that dataset and analysed a bit.
+
+ 
+
+Kindly , everyone go through of it and come up with your insights as well on that to progress our group project. As you all know that, second semester assignments are tough and we are lack of time and packed up with multiple tasks. I would want everyone contribute on this group project and complete this assignment by this month end at least. (Not the writing, but at least the technical part of it. Again, we will try our best!).
+
+ 
+
+Here is the dataset. Hope, everyone enjoy seeing it.
+
+ 
+
+https://www.kaggle.com/blastchar/telco-customer-churn
+
+Telco Customer Churn
+Focused customer retention programs
+www.kaggle.com
+
+ 
+
+The dataset contains information about customers who left or stayed with a telecommunications company, including demographic information and services they subscribed to. The dataset includes 7,042 rows and 12 columns. The target variable is “Churn” which is a binary variable indicating if the customer has churned or not.
+
+ 
+
+Research Question:
+
+================
+
+What factors are most strongly associated with customer churn in the telecommunications industry, and can these factors be used to predict which customers are most likely to leave/churn?
+
+ 
+
+The dataset can also be used for exploratory analysis to understand patterns in customer’s behaviour , but again that would not be that complex for our research. So, please check it and come up with your views.
+
+ 
+
+Comments on this are allowed!.
+
+ 
+
+Regards,
+
+Areefa.
