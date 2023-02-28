@@ -1,0 +1,167 @@
+---
+title: "Group Project_DDA"
+author: "Areefa"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Step-2:Data Cleaning
+
+```{r}
+install.packages("reshape2")
+```
+
+```{r}
+library(tidyverse)
+library(skimr)
+library(validate)
+library(ggplot2)
+library(PerformanceAnalytics)
+library(reshape2)
+```
+
+
+```{r}
+Telco <- read.csv(file= 'C:/Areefa_Brunel/CS5811_Distributed_Data_Analysis/Coursework_Submission/Telco_Customer_Churn.csv')
+```
+
+```{r}
+names(Telco)
+```
+
+```{r}
+nrow(Telco)
+ncol(Telco)
+```
+```{r}
+summary(Telco)
+```
+
+
+```{r}
+
+str(Telco)
+```
+```{r}
+Telco%>%skim()
+```
+```{r}
+boxplot(Telco$TotalCharges, xlab= "TotalCharges", main= "Boxplot of TotalCharges")
+```
+
+
+
+```{r}
+table(Telco$gender)
+```
+
+```{r}
+table(Telco$SeniorCitizen)
+```
+
+```{r}
+table(Telco$Partner)
+```
+
+```{r}
+table(Telco$Dependents)
+```
+
+```{r}
+table(Telco$tenure)
+```
+
+```{r}
+table(Telco$PhoneService)
+```
+```{r}
+table(Telco$MultipleLines)
+```
+"Yes": indicates that the customer has multiple phone lines included in their subscription.
+"No": indicates that the customer does not have multiple phone lines included in their subscription.
+"No phone service": indicates that the customer does not have phone service at all and therefore does not have access to multiple phone lines.
+
+
+```{r}
+Telco_NA_count <- apply(is.na(Telco),2, sum)
+Telco_NA_count
+```
+There are 11 NA's in Totalcharges column. And all the other columns are perfect and no NA's. 
+
+# Lets clean the those 11 columns:
+
+```{r}
+Telco_cleandata <- na.omit(Telco)
+```
+
+```{r}
+nrow(Telco)
+nrow(Telco_cleandata)
+```
+Notice that, 11 rows removed. 
+
+```{r}
+Telco_cleandata%>%skim()
+```
+
+Check the thrid table, you will see no NA's 
+
+Enjoy!!
+
+
+### Step-3: Data Exploration
+
+# visualize the distribution of numeric variables
+
+```{r}
+numeric_vars <- Telco_cleandata %>%
+  select_if(is.numeric)
+
+ggplot(melt(numeric_vars), aes(value)) +
+  geom_histogram(binwidth = 5) +
+  facet_wrap(~variable, scales = "free")
+```
+# Change the Yes/No to 1 and 0 respectively
+
+```{r}
+Telco_cleandata$Churn[Telco_cleandata$Churn == "Yes"] <- 1
+Telco_cleandata$Churn[Telco_cleandata$Churn == "No"] <- 0
+```
+
+
+# PCA Test
+
+```{r}
+mydata<- select(Telco_cleandata,c('tenure','MonthlyCharges','TotalCharges'))
+```
+
+```{r}
+cor(mydata)
+mean(cor(mydata))
+```
+These variables are highly correlated, and they are eligible for PCA. The average correlation is 0.7. 
+
+```{r}
+PCA<- princomp(mydata)
+attributes(PCA)
+```
+PCA loadings:
+
+```{r}
+PCA$loadings
+```
+
+```{r}
+PC <- PCA$scores
+View(PC)
+```
+
+```{r}
+cor(PC)
+```
+
+Values are less than 1. These variables are independent
